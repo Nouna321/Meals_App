@@ -6,10 +6,12 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import { CATEGORIES } from "../Data/Data";
 import Colors from "../constants/colors";
 import CategoryGrid from "../Components/CategoryGrid";
+import ButtonHeader from "../Components/ButtonHeader";
 
 const Categories = (props) => {
   const renderGridItem = (itemData) => {
@@ -38,6 +40,23 @@ const Categories = (props) => {
 };
 
 export default Categories;
+
+Categories.navigationOptions = (navData) => {
+  return {
+    headerTitle: "Meal Categories",
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={ButtonHeader}>
+        <Item
+          title="Menu"
+          iconName="ios-menu"
+          onPress={() => {
+            navData.navigation.toggleDrawer();
+          }}
+        />
+      </HeaderButtons>
+    ),
+  };
+};
 
 const styles = StyleSheet.create({
   screen: {
