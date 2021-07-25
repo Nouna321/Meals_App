@@ -1,13 +1,8 @@
 import React from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Button,
-  ScrollView,
-  Image,
-} from "react-native";
-import { MEALS } from "../Data/Data";
+import { Text, View, StyleSheet, ScrollView, Image } from "react-native";
+
+import { useSelector } from "react-redux";
+
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import ButtonHeader from "../Components/ButtonHeader";
 
@@ -20,9 +15,11 @@ const ListItem = (props) => {
 };
 
 const MealDetail = (props) => {
+  const availableMeals = useSelector((state) => state.meals.meals);
   const mealId = props.navigation.getParam("mealId");
 
-  const selectMeal = MEALS.find((meal) => meal.id === mealId);
+  const selectMeal = availableMeals.find((meal) => meal.id === mealId);
+
   return (
     <ScrollView>
       <Image source={{ uri: selectMeal.imageUrl }} style={styles.image} />
@@ -51,10 +48,11 @@ export default MealDetail;
 
 MealDetail.navigationOptions = (navigationData) => {
   const mealId = navigationData.navigation.getParam("mealId");
-  const selectMeal = MEALS.find((meal) => meal.id === mealId);
+  const mealTitle = navigationData.navigation.setParams("mealTitle");
+  //const selectMeal = MEALS.find((meal) => meal.id === mealId);
 
   return {
-    headerTitle: selectMeal.title,
+    headerTitle: mealTitle,
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={ButtonHeader}>
         <Item
