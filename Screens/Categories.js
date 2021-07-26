@@ -3,7 +3,7 @@ import { StyleSheet, FlatList } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import { CATEGORIES } from "../Data/Data";
-import Colors from "../constants/colors";
+
 import CategoryGrid from "../Components/CategoryGrid";
 import ButtonHeader from "../Components/ButtonHeader";
 

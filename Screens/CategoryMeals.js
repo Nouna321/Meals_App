@@ -1,10 +1,9 @@
 import React from "react";
+import { StyleSheet, View, Text } from "react-native";
 import { useSelector } from "react-redux";
 
-import MealList from "../Components/MealList";
-import Colors from "../constants/colors";
-
 import { CATEGORIES } from "../Data/Data";
+import MealList from "../Components/MealList";
 
 const CategoryMeals = (props) => {
   const catId = props.navigation.getParam("categoryId");
@@ -15,6 +14,13 @@ const CategoryMeals = (props) => {
     (meal) => meal.categoryIds.indexOf(catId) >= 0
   );
 
+  if (displayMeals.length === 0 || !displayMeals) {
+    <View style={styles.screen}>
+      <Text style={{ fontFamily: "open-sens", color: "grey" }}>
+        No Meals found.
+      </Text>
+    </View>;
+  }
   return <MealList dataList={displayMeals} navigation={props.navigation} />;
 };
 
@@ -29,3 +35,11 @@ CategoryMeals.navigationOptions = (navigationData) => {
     headerTitle: selectedCategory.title,
   };
 };
+
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});

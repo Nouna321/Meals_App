@@ -22,7 +22,9 @@ const MealsNavigator = createStackNavigator(
     CategoryMeals: {
       screen: CategoryMeals,
     },
-    MealDetail: MealDetail,
+    MealDetail: {
+      screen: MealDetail,
+    },
   },
   {
     mode: "modal",
